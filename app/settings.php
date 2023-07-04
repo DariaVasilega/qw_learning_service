@@ -32,12 +32,7 @@ return function (ContainerBuilder $containerBuilder) {
                 'db' => require __DIR__ . '/credentials/db.php',
                 'api-query-builder' => [
                     'limit' => 15,
-                    'orderBy' => [
-                        [
-                            'column' => 'id',
-                            'direction' => 'asc'
-                        ]
-                    ],
+                    'orderBy' => [],
                     'excludedParameters' => [],
                 ],
             ]);
