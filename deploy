@@ -2,11 +2,13 @@
 
 docker-compose down
 
-openssl req -x509 -newkey rsa:4096 -keyout ./docker/ssl/workers.ms.key -out ./docker/ssl/workers.ms.pem \
-  -sha256 -days 3650 -nodes -subj "/C=UA/ST=Cherkasy/L=Cherkasy/O=Daria Makarenko/OU=Daria Makarenko/CN=workers.ms"
+mkcert -cert-file ./docker/ssl/workers.ms.pem -key-file ./docker/ssl/workers.ms.key workers.ms
 
 docker-compose up -d --build --force-recreate
 
-docker exec -it qw-workers-ms-php composer install
+# Installing composer package `unlu/laravel-api-query-builder` fix
+if ! eval "docker exec -it qw-workers-ms-php composer install"; then
+  docker exec -it qw-workers-ms-php composer install
+fi;
 docker exec -it qw-workers-ms-php php bin/console migrations:migrate
 docker exec -it qw-workers-ms-php php bin/console fixtures:load -t
