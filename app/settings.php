@@ -20,6 +20,13 @@ return function (ContainerBuilder $containerBuilder) {
                         'uk_UA',
                     ],
                 ],
+                'allowedClients' => [
+                    /*
+                     * 'domain.com',
+                     * 'another-domain.org',
+                     * ...
+                     */
+                ],
                 'translationsPath' => __DIR__ . '/../resources/i18n',
                 'displayErrorDetails' => true,
                 'logError'            => true,
