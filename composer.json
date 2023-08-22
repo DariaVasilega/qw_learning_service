@@ -33,6 +33,7 @@
         "league/flysystem": "^3.15",
         "monolog/monolog": "^2.8",
         "nelmio/alice": "*",
+        "nesbot/carbon": "*",
         "php-di/php-di": "^6.4",
         "robmorgan/phinx": "*",
         "slim/console": "0.x-dev",

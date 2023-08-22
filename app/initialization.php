@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use Carbon\Factory as DateFactory;
 use DI\ContainerBuilder;
 use Illuminate\Contracts\Foundation\Application as IlluminateApplication;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Support\Facades\Date as IlluminateDateFacade;
 use Illuminate\Support\Facades\Schema as IlluminateSchemaFacade;
 use Illuminate\Support\Facades\Validator as IlluminateValidatorFacade;
 use Illuminate\Validation\Factory as ValidationFactory;
@@ -43,4 +45,5 @@ $capsule = $container->get(Capsule::class);
 /** @var IlluminateApplication $laravelAppMock */
 $laravelAppMock = ['db' => $capsule, 'db.schema' => $capsule::schema()];
 IlluminateValidatorFacade::swap($container->get(ValidationFactory::class));
+IlluminateDateFacade::swap($container->get(DateFactory::class));
 IlluminateSchemaFacade::setFacadeApplication($laravelAppMock);
