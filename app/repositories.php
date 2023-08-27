@@ -7,6 +7,8 @@ use App\Application\Directory\LocaleInterface;
 use App\Application\SearchCriteriaInterface;
 use App\Application\SearchResultInterface;
 use App\Application\SearchResultPageInterface;
+use App\Domain\LectionRepositoryInterface;
+use App\Infrastructure\Database\Persistence\LectionRepository;
 use App\Infrastructure\Database\Query\SearchCriteria;
 use App\Infrastructure\SearchResult;
 use App\Infrastructure\SearchResultPage;
@@ -20,5 +22,6 @@ return function (ContainerBuilder $containerBuilder) {
         SearchCriteriaInterface::class => autowire(SearchCriteria::class),
         SearchResultInterface::class => autowire(SearchResult::class),
         SearchResultPageInterface::class => autowire(SearchResultPage::class),
+        LectionRepositoryInterface::class => autowire(LectionRepository::class),
     ]);
 };
