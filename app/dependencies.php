@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Application\Directory\LocaleInterface;
 use App\Application\Settings\SettingsInterface;
+use App\Infrastructure\Filesystem\Log\LectionActionLogger;
 use DI\ContainerBuilder;
 use Illuminate\Container\Container as IlluminateContainer;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -83,6 +84,16 @@ return function (ContainerBuilder $containerBuilder) {
             $illuminateContainer->alias(EventsDispatcher::class, 'events');
 
             return $illuminateContainer;
+        },
+        LectionActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/lection_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('lection-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new LectionActionLogger($userActionsLogger);
         },
     ]);
 };
