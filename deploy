@@ -1,0 +1,14 @@
+#!/bin/sh
+
+docker-compose down
+
+mkcert -cert-file ./docker/ssl/learning.ms.pem -key-file ./docker/ssl/learning.ms.key learning.ms
+
+docker-compose up -d --build --force-recreate
+
+# Installing composer package `unlu/laravel-api-query-builder` fix
+if ! eval "docker exec -it qw-learning-ms-php composer install"; then
+  docker exec -it qw-learning-ms-php composer install
+fi;
+docker exec -it qw-learning-ms-php php bin/console migrations:migrate
+docker exec -it qw-learning-ms-php php bin/console fixtures:load -t

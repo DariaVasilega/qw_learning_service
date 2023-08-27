@@ -1,0 +1,87 @@
+{
+    "name": "slim/slim-skeleton",
+    "description": "A Slim Framework skeleton application for rapid development",
+    "keywords": [
+        "microframework",
+        "rest",
+        "router",
+        "psr7"
+    ],
+    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Lockhart",
+            "email": "info@joshlockhart.com",
+            "homepage": "http://www.joshlockhart.com/"
+        },
+        {
+            "name": "Pierre Berube",
+            "email": "pierre@lgse.com",
+            "homepage": "http://www.lgse.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "cweagans/composer-patches": "^1.7",
+        "illuminate/database": "*",
+        "illuminate/events": "*",
+        "illuminate/http": "*",
+        "illuminate/pagination": "*",
+        "illuminate/validation": "*",
+        "league/flysystem": "^3.15",
+        "monolog/monolog": "^2.8",
+        "nelmio/alice": "*",
+        "nesbot/carbon": "*",
+        "php-di/php-di": "^6.4",
+        "robmorgan/phinx": "*",
+        "slim/console": "0.x-dev",
+        "slim/psr7": "^1.5",
+        "slim/slim": "^4.10",
+        "unlu/laravel-api-query-builder": "*"
+    },
+    "require-dev": {
+        "jangregor/phpstan-prophecy": "^1.0.0",
+        "phpmd/phpmd": "*",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.2.0",
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^9.5.26",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "cweagans/composer-patches": true
+        },
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    },
+    "replace": {
+        "laravel/framework": "^9"
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "unlu/laravel-api-query-builder": {
+                "https://github.com/DariaVasilega/qw_auth_service/issues/5#issuecomment-1607783782": "./patches/issue-5-paginator-and-uri-parser.patch"
+            }
+        }
+    }
+}
