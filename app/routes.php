@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\App;
-
-return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
+return function (\Slim\App $app) {
+    // Lection CRUD
+    $app->group('/lection', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+        $router->post('', \App\Application\Actions\Lection\Create::class);
+        $router->get('s', \App\Application\Actions\Lection\ReadList::class);
+        $router->group('/{id:[0-9]+}', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+            $router->get('', \App\Application\Actions\Lection\Read::class);
+            $router->put('', \App\Application\Actions\Lection\Update::class);
+            $router->delete('', \App\Application\Actions\Lection\Delete::class);
+        });
     });
 };
