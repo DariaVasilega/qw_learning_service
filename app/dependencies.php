@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Application\Directory\LocaleInterface;
 use App\Application\Settings\SettingsInterface;
+use App\Infrastructure\Filesystem\Log\AnswerActionLogger;
 use App\Infrastructure\Filesystem\Log\LectionActionLogger;
 use App\Infrastructure\Filesystem\Log\QuestionActionLogger;
 use App\Infrastructure\Filesystem\Log\TestActionLogger;
@@ -116,6 +117,16 @@ return function (ContainerBuilder $containerBuilder) {
             $userActionsLogger->setHandlers([$handler]);
 
             return new QuestionActionLogger($userActionsLogger);
+        },
+        AnswerActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/answer_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('answer-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new AnswerActionLogger($userActionsLogger);
         },
     ]);
 };
