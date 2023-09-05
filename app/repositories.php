@@ -8,8 +8,10 @@ use App\Application\SearchCriteriaInterface;
 use App\Application\SearchResultInterface;
 use App\Application\SearchResultPageInterface;
 use App\Domain\LectionRepositoryInterface;
+use App\Domain\QuestionRepositoryInterface;
 use App\Domain\TestRepositoryInterface;
 use App\Infrastructure\Database\Persistence\LectionRepository;
+use App\Infrastructure\Database\Persistence\QuestionRepository;
 use App\Infrastructure\Database\Persistence\TestRepository;
 use App\Infrastructure\Database\Query\SearchCriteria;
 use App\Infrastructure\SearchResult;
@@ -26,5 +28,6 @@ return function (ContainerBuilder $containerBuilder) {
         SearchResultPageInterface::class => autowire(SearchResultPage::class),
         LectionRepositoryInterface::class => autowire(LectionRepository::class),
         TestRepositoryInterface::class => autowire(TestRepository::class),
+        QuestionRepositoryInterface::class => autowire(QuestionRepository::class),
     ]);
 };
