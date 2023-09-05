@@ -10,10 +10,12 @@ use App\Application\SearchResultPageInterface;
 use App\Domain\AnswerRepositoryInterface;
 use App\Domain\LectionRepositoryInterface;
 use App\Domain\QuestionRepositoryInterface;
+use App\Domain\ScoreRepositoryInterface;
 use App\Domain\TestRepositoryInterface;
 use App\Infrastructure\Database\Persistence\AnswerRepository;
 use App\Infrastructure\Database\Persistence\LectionRepository;
 use App\Infrastructure\Database\Persistence\QuestionRepository;
+use App\Infrastructure\Database\Persistence\ScoreRepository;
 use App\Infrastructure\Database\Persistence\TestRepository;
 use App\Infrastructure\Database\Query\SearchCriteria;
 use App\Infrastructure\SearchResult;
@@ -32,5 +34,6 @@ return function (ContainerBuilder $containerBuilder) {
         TestRepositoryInterface::class => autowire(TestRepository::class),
         QuestionRepositoryInterface::class => autowire(QuestionRepository::class),
         AnswerRepositoryInterface::class => autowire(AnswerRepository::class),
+        ScoreRepositoryInterface::class => autowire(ScoreRepository::class),
     ]);
 };
