@@ -7,6 +7,7 @@ use App\Application\Settings\SettingsInterface;
 use App\Infrastructure\Filesystem\Log\AnswerActionLogger;
 use App\Infrastructure\Filesystem\Log\LectionActionLogger;
 use App\Infrastructure\Filesystem\Log\QuestionActionLogger;
+use App\Infrastructure\Filesystem\Log\ScoreActionLogger;
 use App\Infrastructure\Filesystem\Log\TestActionLogger;
 use DI\ContainerBuilder;
 use Illuminate\Container\Container as IlluminateContainer;
@@ -127,6 +128,16 @@ return function (ContainerBuilder $containerBuilder) {
             $userActionsLogger->setHandlers([$handler]);
 
             return new AnswerActionLogger($userActionsLogger);
+        },
+        ScoreActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/score_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('score-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new ScoreActionLogger($userActionsLogger);
         },
     ]);
 };
