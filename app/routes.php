@@ -35,4 +35,15 @@ return function (\Slim\App $app) {
             $router->delete('', \App\Application\Actions\Question\Delete::class);
         });
     });
+
+    // Answer CRUD
+    $app->group('/answer', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+        $router->post('', \App\Application\Actions\Answer\Create::class);
+        $router->get('s', \App\Application\Actions\Answer\ReadList::class);
+        $router->group('/{id:[0-9]+}', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+            $router->get('', \App\Application\Actions\Answer\Read::class);
+            $router->put('', \App\Application\Actions\Answer\Update::class);
+            $router->delete('', \App\Application\Actions\Answer\Delete::class);
+        });
+    });
 };
