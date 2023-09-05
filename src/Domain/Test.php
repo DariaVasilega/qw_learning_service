@@ -10,6 +10,7 @@ namespace App\Domain;
  * @property float $passing_score
  * @property int $lection_id
  * @property \App\Domain\Lection $lection
+ * @property \Illuminate\Database\Eloquent\Collection $questions
  */
 class Test extends \Illuminate\Database\Eloquent\Model
 {
@@ -38,5 +39,13 @@ class Test extends \Illuminate\Database\Eloquent\Model
     public function lection(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Lection::class, 'id', 'lection_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function questions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Question::class, 'test_id', 'id');
     }
 }

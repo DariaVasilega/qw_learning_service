@@ -9,6 +9,7 @@ namespace App\Domain;
  * @property string $text
  * @property int $test_id
  * @property \App\Domain\Test $test
+ * @property \Illuminate\Database\Eloquent\Collection $answers
  */
 class Question extends \Illuminate\Database\Eloquent\Model
 {
@@ -36,5 +37,13 @@ class Question extends \Illuminate\Database\Eloquent\Model
     public function test(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Test::class, 'id', 'test_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Answer::class, 'question_id', 'id');
     }
 }
