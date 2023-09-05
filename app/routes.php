@@ -46,4 +46,15 @@ return function (\Slim\App $app) {
             $router->delete('', \App\Application\Actions\Answer\Delete::class);
         });
     });
+
+    // Score CRUD
+    $app->group('/score', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+        $router->post('', \App\Application\Actions\Score\Create::class);
+        $router->get('s', \App\Application\Actions\Score\ReadList::class);
+        $router->group('/{id:[0-9]+}', function (\Slim\Interfaces\RouteCollectorProxyInterface $router) {
+            $router->get('', \App\Application\Actions\Score\Read::class);
+            $router->put('', \App\Application\Actions\Score\Update::class);
+            $router->delete('', \App\Application\Actions\Score\Delete::class);
+        });
+    });
 };
