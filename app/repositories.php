@@ -7,9 +7,11 @@ use App\Application\Directory\LocaleInterface;
 use App\Application\SearchCriteriaInterface;
 use App\Application\SearchResultInterface;
 use App\Application\SearchResultPageInterface;
+use App\Domain\AnswerRepositoryInterface;
 use App\Domain\LectionRepositoryInterface;
 use App\Domain\QuestionRepositoryInterface;
 use App\Domain\TestRepositoryInterface;
+use App\Infrastructure\Database\Persistence\AnswerRepository;
 use App\Infrastructure\Database\Persistence\LectionRepository;
 use App\Infrastructure\Database\Persistence\QuestionRepository;
 use App\Infrastructure\Database\Persistence\TestRepository;
@@ -29,5 +31,6 @@ return function (ContainerBuilder $containerBuilder) {
         LectionRepositoryInterface::class => autowire(LectionRepository::class),
         TestRepositoryInterface::class => autowire(TestRepository::class),
         QuestionRepositoryInterface::class => autowire(QuestionRepository::class),
+        AnswerRepositoryInterface::class => autowire(AnswerRepository::class),
     ]);
 };
