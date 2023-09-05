@@ -22,6 +22,9 @@ return function (\Slim\App $app) {
             $router->get('', \App\Application\Actions\Test\Read::class);
             $router->put('', \App\Application\Actions\Test\Update::class);
             $router->delete('', \App\Application\Actions\Test\Delete::class);
+
+            // Test Questions Route
+            $router->get('/questions', \App\Application\Actions\Test\Questions::class);
         });
     });
 
@@ -33,6 +36,9 @@ return function (\Slim\App $app) {
             $router->get('', \App\Application\Actions\Question\Read::class);
             $router->put('', \App\Application\Actions\Question\Update::class);
             $router->delete('', \App\Application\Actions\Question\Delete::class);
+
+            // Question Answers Route
+            $router->get('/answers', \App\Application\Actions\Question\Answers::class);
         });
     });
 
