@@ -1,0 +1,6 @@
+\App\Domain\Answer:
+  answer_{1..400}:
+    id (unique): '<current()>'
+    text: '<word()>'
+    question_id: '<($current < 4 ? 1 : ceil($current / 4))>'
+    points: '<($current % 4 === 0 ? (rand(1, 100) / 10) : 0)>'

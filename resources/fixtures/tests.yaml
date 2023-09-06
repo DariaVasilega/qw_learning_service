@@ -1,0 +1,6 @@
+\App\Domain\Test:
+  test_{1..10}:
+    id (unique): '<current()>'
+    lection_id: '<current()>'
+    label: '<ucfirst(<word()>)> <ucfirst(<word()>)>'
+    passing_score: '<randomFloat(null, 50, 100)>'

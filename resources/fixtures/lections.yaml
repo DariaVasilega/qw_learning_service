@@ -1,0 +1,4 @@
+\App\Domain\Lection:
+  lection_{1..10}:
+    id (unique): '<current()>'
+    text: '<paragraph(100)>'
