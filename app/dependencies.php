@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 use App\Application\Directory\LocaleInterface;
 use App\Application\Settings\SettingsInterface;
+use App\Infrastructure\Filesystem\Log\AnswerActionLogger;
 use App\Infrastructure\Filesystem\Log\LectionActionLogger;
+use App\Infrastructure\Filesystem\Log\QuestionActionLogger;
+use App\Infrastructure\Filesystem\Log\ScoreActionLogger;
+use App\Infrastructure\Filesystem\Log\TestActionLogger;
 use DI\ContainerBuilder;
 use Illuminate\Container\Container as IlluminateContainer;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -94,6 +98,46 @@ return function (ContainerBuilder $containerBuilder) {
             $userActionsLogger->setHandlers([$handler]);
 
             return new LectionActionLogger($userActionsLogger);
+        },
+        TestActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/test_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('test-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new TestActionLogger($userActionsLogger);
+        },
+        QuestionActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/question_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('question-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new QuestionActionLogger($userActionsLogger);
+        },
+        AnswerActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/answer_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('answer-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new AnswerActionLogger($userActionsLogger);
+        },
+        ScoreActionLogger::class => function (ContainerInterface $c) {
+            $logger = $c->get(LoggerInterface::class);
+            $logFile = isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/score_action.log';
+            $handler = new StreamHandler($logFile, Logger::ERROR);
+
+            $userActionsLogger = $logger->withName('score-action');
+            $userActionsLogger->setHandlers([$handler]);
+
+            return new ScoreActionLogger($userActionsLogger);
         },
     ]);
 };

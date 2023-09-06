@@ -1,0 +1,5 @@
+\App\Domain\Question:
+  question_{1..100}:
+    id (unique): '<current()>'
+    text: '<realText(50)> ?'
+    test_id: '<($current < 11 ? 1 : ceil($current / 10))>'

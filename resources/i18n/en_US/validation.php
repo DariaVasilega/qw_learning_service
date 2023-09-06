@@ -9,4 +9,5 @@ return [
     'in' => ':Attribute must be one of the listed values: "%s".',
     'min.string' => ':Attribute must be longer than :min character(s).',
     'max.string' => ':Attribute must be less than :max character(s).',
+    'numeric' => ':Attribute must be numeric.',
 ];
