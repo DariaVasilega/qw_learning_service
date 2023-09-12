@@ -98,4 +98,27 @@ SQL;
 
         return true;
     }
+
+    /**
+     * @param string $oldEmail
+     * @param string $newEmail
+     * @return bool
+     */
+    public function updateScoresUser(string $oldEmail, string $newEmail): bool
+    {
+        $this->queryBuilder->newQuery()->where('email', $oldEmail)->update(['email' => $newEmail]);
+
+        return true;
+    }
+
+    /**
+     * @param string $email
+     * @return bool
+     */
+    public function deleteUserScores(string $email): bool
+    {
+        $this->queryBuilder->newQuery()->where('email', $email)->delete();
+
+        return true;
+    }
 }

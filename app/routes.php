@@ -62,5 +62,9 @@ return function (\Slim\App $app) {
             $router->put('', \App\Application\Actions\Score\Update::class);
             $router->delete('', \App\Application\Actions\Score\Delete::class);
         });
+
+        // Custom CRUD
+        $router->post('/delete-by-user-email', \App\Application\Actions\Score\Custom\DeleteByUserEmail::class);
+        $router->post('/change-user-email', \App\Application\Actions\Score\Custom\ChangeUserEmail::class);
     });
 };
