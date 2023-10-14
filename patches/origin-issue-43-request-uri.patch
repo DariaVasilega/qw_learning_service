@@ -1,0 +1,13 @@
+diff --git a/src/RequestCreator.php b/src/RequestCreator.php
+index 7f3f094..a91bdcb 100644
+--- a/src/RequestCreator.php
++++ b/src/RequestCreator.php
+@@ -33,7 +33,7 @@ class RequestCreator
+             $server = $_SERVER;
+         }
+ 
+-        $requestUri = $_SERVER['PATH_INFO'];
++        $requestUri = explode("?", $_SERVER['REQUEST_URI'])[0];
+         $requestQueryString = '';
+ 
+         if (count($get) > 0) {

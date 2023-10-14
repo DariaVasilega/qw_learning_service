@@ -80,7 +80,8 @@
         "composer-exit-on-patch-failure": true,
         "patches": {
             "unlu/laravel-api-query-builder": {
-                "https://github.com/DariaVasilega/qw_auth_service/issues/5#issuecomment-1607783782": "./patches/issue-5-paginator-and-uri-parser.patch"
+                "https://github.com/DariaVasilega/qw_auth_service/issues/5#issuecomment-1607783782": "./patches/issue-5-paginator-and-uri-parser.patch",
+                "https://github.com/selahattinunlu/laravel-api-query-builder/issues/43": "./patches/origin-issue-43-request-uri.patch"
             }
         }
     }
