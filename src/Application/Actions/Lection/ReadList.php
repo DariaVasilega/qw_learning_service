@@ -11,7 +11,7 @@ class ReadList extends Action
     /**
      * @var \App\Factory\SearchCriteriaFactory $criteriaFactory
      */
-    private \App\Factory\SearchCriteriaFactory $criteriaFactory;
+    protected \App\Factory\SearchCriteriaFactory $criteriaFactory;
 
     public function __construct(
         \App\Infrastructure\Filesystem\Log\LectionActionLogger $logger,

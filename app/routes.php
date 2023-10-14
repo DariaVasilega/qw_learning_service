@@ -12,6 +12,8 @@ return function (\Slim\App $app) {
             $router->put('', \App\Application\Actions\Lection\Update::class);
             $router->delete('', \App\Application\Actions\Lection\Delete::class);
         });
+
+        $router->get('/last/statistic', \App\Application\Actions\Lection\LatestLectionStatistic::class);
     });
 
     // Test CRUD
